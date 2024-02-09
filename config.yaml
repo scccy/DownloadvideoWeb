@@ -1,9 +1,8 @@
 mysql_settings:
   MYSQL_DB: dy_gather
   MYSQL_USER: root
-  MYSQL_PASSWORD: *****
+  MYSQL_PASSWORD: '*****'
   MYSQL_HOST: 192.168.31.85
   MYSQL_PORT: 5306
 server_settings:
   url: 'http://127.0.0.1:8000/search/'
-  #asd
