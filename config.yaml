@@ -6,3 +6,4 @@ mysql_settings:
   MYSQL_PORT: 5306
 server_settings:
   url: 'http://127.0.0.1:8000/search/'
+  #asd
