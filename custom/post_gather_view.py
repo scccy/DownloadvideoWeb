@@ -21,7 +21,7 @@ def search_data(json_data):
 
     response = requests.request("POST", url, headers=headers, data=payload)
     response_data = response.json()
-    return response_data['data']
+    return response_data
 
 
 def save_search_data(search):
