@@ -5,21 +5,17 @@ import glob
 from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+from DownloadvideoWeb import settings
 
 current_dateTime = datetime.now().strftime('%Y_%m_%d')
-
-MYSQL_HOST = '192.168.31.85'
-MYSQL_PORT = '5306'
-MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'asdsc88Q12'
-MYSQL_DB = 'dy_gather'
 
 
 class GatherCsv:
     def __init__(self):
         print('>> 连接MySQL...')
         self.engine = create_engine('mysql+pymysql://%s:%s@%s:%s/%s?charset=utf8mb4'
-                                    % (MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DB))
+                                    % (settings.MYSQL_USER, settings.MYSQL_PASSWORD, settings.MYSQL_HOST,
+                                       settings.MYSQL_PORT, settings.MYSQL_DBNAME))
         print('>> 已连接数据表。')
         # 建立链接游标
         self.session = Session(self.engine.connect())
@@ -70,4 +66,3 @@ class GatherCsv:
             self.engine.dispose()
         except Exception as e:
             print(e)
-
