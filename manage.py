@@ -18,5 +18,9 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    from django.core.management.commands.runserver import Command as Runserver
+
+    Runserver.default_addr = '0.0.0.0'  # 修改默认地址
+    Runserver.default_port = '5800'  # 修改默认端口
     main()
