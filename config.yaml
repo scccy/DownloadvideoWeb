@@ -1,7 +1,7 @@
 mysql_settings:
   MYSQL_DB: 'dy_gather'
   MYSQL_USER: 'root'
-  MYSQL_PASSWORD: 'asdsc88Q12'
+  MYSQL_PASSWORD: '*****'
   MYSQL_HOST: '192.168.31.85'
   MYSQL_PORT: '5306'
 
