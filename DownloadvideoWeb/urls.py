@@ -18,6 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("tk/", include("tkflow.urls")),
+    path("tk/", include("flow_tk.urls")),
     path('admin/', admin.site.urls),
 ]

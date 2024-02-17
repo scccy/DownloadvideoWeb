@@ -1,7 +1,7 @@
 import json
 
 import requests
-from tkflow.models import GatherDay
+from flow_tk.models import GatherDay
 from DownloadvideoWeb import session
 from DownloadvideoWeb.settings import server_url
 from sqlalchemy import select

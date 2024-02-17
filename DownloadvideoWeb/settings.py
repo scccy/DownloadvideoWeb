@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sqlalchemy_django_admin',
-    'tkflow.apps.TkflowConfig',
+    'flow_tk.apps.TkflowConfig',
     'sqlalchemy',
     'custom',
+    'flow_clip_talk.apps.CliptalkConfig',
 
 ]
 

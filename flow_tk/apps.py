@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class TkflowConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'tkflow'
+    name = 'flow_tk'
