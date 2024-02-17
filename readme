@@ -1,0 +1,8 @@
+ src/application/main_server.py
+ 复制到
+ @app.route('/single/', methods=['POST'])
+        def single():
+            url = request.json.get("url")
+            if not url:
+                return self.error_works
+            return self.deal_single_works(url, False) or self.error_works
