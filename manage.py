@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DownloadvideoWeb.settings')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DownloadvideoWeb.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -21,6 +21,6 @@ def main():
 if __name__ == "__main__":
     from django.core.management.commands.runserver import Command as Runserver
 
-    Runserver.default_addr = '0.0.0.0'  # 修改默认地址
-    Runserver.default_port = '5800'  # 修改默认端口
+    Runserver.default_addr = "0.0.0.0"  # 修改默认地址
+    Runserver.default_port = "5800"  # 修改默认端口
     main()
