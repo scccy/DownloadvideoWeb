@@ -1,10 +1,12 @@
 import { AxiosInstance } from 'axios';
+import { http } from './decorator';
 
+@http('tk')
 class Tk {
-  private http: AxiosInstance!;
+  http: AxiosInstance | null = null;
 
   search() {
-    this.http.post('/tk/search');
+    this.http?.post('search');
   }
 }
 

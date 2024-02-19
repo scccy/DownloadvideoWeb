@@ -1,3 +1,5 @@
+import { Tk } from './tk';
+
 class ApiInstance {
   tk = new Tk();
 }
