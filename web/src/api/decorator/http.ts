@@ -5,7 +5,7 @@ function http(path: string) {
     baseURL: path,
   });
 
-  return function (constructor: any) {
+  return function (constructor: new (...args: any[]) => any) {
     return class extends constructor {
       http = axiosInstance;
     } as any;
