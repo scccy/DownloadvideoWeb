@@ -1,9 +1,23 @@
-import { Form, Input } from 'antd';
+import { Form, FormProps, Input } from 'antd';
 import React from 'react';
+import { useParams } from '../../store/params';
 
 const Params: React.FC = () => {
+  const formData = useParams();
+  const handleFormChange: FormProps['onValuesChange'] = (
+    changeValues,
+    values,
+  ) => {
+    formData.setParams(changeValues);
+  };
+
   return (
-    <Form layout="vertical" style={{ maxWidth: '600px' }}>
+    <Form
+      initialValues={formData}
+      layout="vertical"
+      style={{ maxWidth: '600px' }}
+      onValuesChange={handleFormChange}
+    >
       <Form.Item label="keyword" name="keyword">
         <Input />
       </Form.Item>
