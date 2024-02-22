@@ -60,7 +60,7 @@ const Gather: React.FC = () => {
             <Input type="number" defaultValue={1} />
           </Form.Item>
 
-          <Form.Item label="排序依据" name="pages">
+          <Form.Item label="排序依据" name="sort_type">
             <Input />
           </Form.Item>
 

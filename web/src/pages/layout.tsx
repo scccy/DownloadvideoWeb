@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Layout as AntdLayout, Button, Menu, MenuProps, theme } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
@@ -11,6 +11,7 @@ const Layout: React.FC = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   const nav = useNavigate();
+  const location = useLocation();
 
   const items: MenuProps['items'] = [
     {
@@ -43,7 +44,7 @@ const Layout: React.FC = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={[items[0]?.key!]}
+          selectedKeys={location.pathname.split('/')}
           items={items}
           onClick={handleMenuClick}
         />
