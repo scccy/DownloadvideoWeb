@@ -11,7 +11,7 @@ type Value = {
   setParams: (prams: Omit<Value, 'setParams'>) => void;
 };
 
-const useParams = create(
+const useGather = create(
   persist<Value>(
     set => ({
       type: '',
@@ -30,4 +30,4 @@ const useParams = create(
   ),
 );
 
-export { useParams };
+export { useGather };

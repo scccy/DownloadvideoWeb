@@ -1,4 +1,4 @@
-type SearchParams = {
+type SearchData = {
   keyword: string;
   type: string;
   pages: string;
@@ -6,4 +6,4 @@ type SearchParams = {
   publish_time: string;
 };
 
-export type { SearchParams };
+export type { SearchData };

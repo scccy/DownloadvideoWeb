@@ -1,4 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
+import { message } from 'antd';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 
 type Request = (config: Parameters<AxiosInstance['request']>[0]) => {
   abort: AbortController['abort'];
@@ -12,7 +13,14 @@ function http(path: string) {
 
   const request = (config: Parameters<typeof axiosInstance.request>[0]) => {
     const abortController = new AbortController();
-    axiosInstance.request({ ...config, signal: abortController.signal });
+    const request = axiosInstance.request({
+      ...config,
+      signal: abortController.signal,
+    });
+
+    request.catch((e: AxiosError) => {
+      message.error(e.message);
+    });
 
     return {
       request,

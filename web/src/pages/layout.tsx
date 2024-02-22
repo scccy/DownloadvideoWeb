@@ -37,7 +37,7 @@ const Layout: React.FC = () => {
   };
 
   return (
-    <AntdLayout style={{ minHeight: '100vh' }}>
+    <AntdLayout style={{ height: '100vh' }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
@@ -66,6 +66,7 @@ const Layout: React.FC = () => {
             margin: '24px 16px',
             padding: 24,
             minHeight: 280,
+            overflowY: 'scroll',
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
