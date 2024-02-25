@@ -15,7 +15,10 @@ import { useLockFn } from 'ahooks';
 import { useApi } from '../../hooks';
 import { useGather } from '../../store/gather';
 import TableLayout from '../../components/tableLayout';
+import { date } from '../../utils';
 import styles from './index.module.scss';
+
+const { defaultDateFormat } = date;
 
 const Gather: React.FC = () => {
   const { tk } = useApi();
@@ -94,7 +97,7 @@ const Gather: React.FC = () => {
           </Form.Item>
 
           <Form.Item label="发布时间" name="publish_time">
-            <DatePicker format="YYYY/MM/DD" />
+            <DatePicker format={defaultDateFormat} />
           </Form.Item>
 
           <Form.Item label="抖音 cookie" name="cookie">
@@ -131,7 +134,7 @@ const Gather: React.FC = () => {
               columns={columns}
               dataSource={dataSource}
               scroll={{ y: height - 170 }}
-            ></Table>
+            />
           );
         }}
       </TableLayout>
