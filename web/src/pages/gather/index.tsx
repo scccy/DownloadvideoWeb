@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   Button,
   DatePicker,
@@ -14,6 +14,7 @@ import {
 import { useLockFn } from 'ahooks';
 import { useApi } from '../../hooks';
 import { useGather } from '../../store/gather';
+import TableLayout from '../../components/tableLayout';
 import styles from './index.module.scss';
 
 const Gather: React.FC = () => {
@@ -21,7 +22,6 @@ const Gather: React.FC = () => {
   const searchFormData = useGather();
   const [loading, setLoading] = React.useState(false);
   const [dataSource, setDataSource] = React.useState([]);
-  const container = useRef<HTMLDivElement>(null);
 
   const handleSearch = useLockFn(async () => {
     setLoading(true);
@@ -72,6 +72,7 @@ const Gather: React.FC = () => {
       key: 'desc',
     },
   ];
+
   return (
     <div className={styles.container}>
       <Form onValuesChange={handleValueChanges}>
@@ -116,15 +117,24 @@ const Gather: React.FC = () => {
         </Flex>
       </Form>
 
-      <div className={styles.table} ref={container}>
-        <Table
-          sticky
-          bordered
-          scroll={{ y: container.current?.offsetHeight }}
-          columns={columns}
-          dataSource={dataSource}
-        ></Table>
-      </div>
+      <TableLayout>
+        {props => {
+          const { height } = props;
+
+          if (!height) return null;
+
+          return (
+            <Table
+              rowKey={'dynamic_cover'}
+              sticky
+              bordered
+              columns={columns}
+              dataSource={dataSource}
+              scroll={{ y: height - 170 }}
+            ></Table>
+          );
+        }}
+      </TableLayout>
     </div>
   );
 };
