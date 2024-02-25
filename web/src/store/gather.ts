@@ -15,7 +15,7 @@ const useGather = create(
   persist<Value>(
     set => ({
       type: '',
-      pages: '',
+      pages: '1',
       keyword: '',
       sort_type: '',
       publish_time: '',

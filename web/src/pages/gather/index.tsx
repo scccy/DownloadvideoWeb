@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Button,
   DatePicker,
   Flex,
   Form,
   FormProps,
+  Image,
   Input,
   Switch,
   Table,
+  TableProps,
 } from 'antd';
 import { useLockFn } from 'ahooks';
 import { useApi } from '../../hooks';
@@ -18,6 +20,8 @@ const Gather: React.FC = () => {
   const { tk } = useApi();
   const searchFormData = useGather();
   const [loading, setLoading] = React.useState(false);
+  const [dataSource, setDataSource] = React.useState([]);
+  const container = useRef<HTMLDivElement>(null);
 
   const handleSearch = useLockFn(async () => {
     setLoading(true);
@@ -32,6 +36,7 @@ const Gather: React.FC = () => {
       });
 
       const result = await request;
+      setDataSource(result.data.data.data);
     } finally {
       setLoading(false);
     }
@@ -44,11 +49,34 @@ const Gather: React.FC = () => {
     searchFormData.setParams(values);
   };
 
+  const columns: TableProps['columns'] = [
+    {
+      title: '封面',
+      render: value => {
+        return <Image className={styles.cover} src={value} />;
+      },
+      dataIndex: 'dynamic_cover',
+      key: 'dynamic_cover',
+    },
+    {
+      title: '音乐地址',
+      render: value => {
+        return <audio src={value} controls></audio>;
+      },
+      dataIndex: 'music_url',
+      key: 'music_url',
+    },
+    {
+      title: '描述',
+      dataIndex: 'desc',
+      key: 'desc',
+    },
+  ];
   return (
     <div className={styles.container}>
       <Form onValuesChange={handleValueChanges}>
-        <Flex wrap="wrap" gap="large">
-          <Form.Item label="关键字" name="关键字" required>
+        <Flex wrap="wrap" gap="large" defaultValue={searchFormData}>
+          <Form.Item label="关键字" name="keyword" required>
             <Input />
           </Form.Item>
 
@@ -57,7 +85,7 @@ const Gather: React.FC = () => {
           </Form.Item>
 
           <Form.Item label="搜索页数" name="pages">
-            <Input type="number" defaultValue={1} />
+            <Input type="number" />
           </Form.Item>
 
           <Form.Item label="排序依据" name="sort_type">
@@ -65,7 +93,7 @@ const Gather: React.FC = () => {
           </Form.Item>
 
           <Form.Item label="发布时间" name="publish_time">
-            <DatePicker />
+            <DatePicker format="YYYY/MM/DD" />
           </Form.Item>
 
           <Form.Item label="抖音 cookie" name="cookie">
@@ -88,7 +116,15 @@ const Gather: React.FC = () => {
         </Flex>
       </Form>
 
-      <Table></Table>
+      <div className={styles.table} ref={container}>
+        <Table
+          sticky
+          bordered
+          scroll={{ y: container.current?.offsetHeight }}
+          columns={columns}
+          dataSource={dataSource}
+        ></Table>
+      </div>
     </div>
   );
 };

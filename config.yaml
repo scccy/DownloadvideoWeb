@@ -1,11 +1,11 @@
 mysql_settings:
   MYSQL_DB: 'dy_gather'
   MYSQL_USER: 'root'
-  MYSQL_PASSWORD: '123456'
-  MYSQL_HOST: '127.0.0.1'
-  MYSQL_PORT: '3306'
+  MYSQL_PASSWORD: 'asdsc88Q12'
+  MYSQL_HOST: 'scccy6.cn'
+  MYSQL_PORT: '5306'
 
 
 server_settings:
-    url: 'http:scccy6.cn:5444'
+    url: 'http://scccy6.cn:5444/'
     MYSQL_DB: 'dy_gather'

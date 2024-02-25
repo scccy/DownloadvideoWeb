@@ -1,4 +1,15 @@
 /** @format */
 
 .container {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+
+  .table {
+    flex-grow: 1;
+  }
+
+  .cover {
+    width: 150px;
+  }
 }

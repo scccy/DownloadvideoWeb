@@ -38,10 +38,10 @@ def search(request):
         data = search_data(request_data)
         if data["message"] == "success":
             # 存入数据库
-            return_data = search_data_save(data["data"])
+            search_data_save(data)
             response_data["status"] = 200
             response_data["msg"] = "success"
-            response_data["data"] = return_data
+            response_data["data"] = data
             return JsonResponse(response_data)
         else:
             response_data["status"] = 500

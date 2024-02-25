@@ -92,6 +92,7 @@ def search_data_save(search):
                 session.commit()
         return "success"
     except Exception as e:
+        print(e)
         session.commit()
         session.close()
         return e
