@@ -58,6 +58,10 @@ const Gather: React.FC = () => {
     searchFormData.setParams(values);
   };
 
+  const handleDownload = (value: string) => {
+    window.open(value);
+  };
+
   const columns: TableProps['columns'] = [
     {
       title: '封面',
@@ -65,7 +69,6 @@ const Gather: React.FC = () => {
         return <Image className={styles.cover} src={value} />;
       },
       dataIndex: 'dynamic_cover',
-      key: 'dynamic_cover',
     },
     {
       title: '音乐地址',
@@ -73,12 +76,27 @@ const Gather: React.FC = () => {
         return <audio src={value} controls></audio>;
       },
       dataIndex: 'music_url',
-      key: 'music_url',
     },
     {
       title: '描述',
       dataIndex: 'desc',
-      key: 'desc',
+    },
+    { title: '类型', dataIndex: 'type' },
+    {
+      title: '操作',
+      dataIndex: 'downloads',
+      render: value => {
+        return (
+          <Button
+            type="primary"
+            onClick={() => {
+              handleDownload(value);
+            }}
+          >
+            查看
+          </Button>
+        );
+      },
     },
   ];
 
