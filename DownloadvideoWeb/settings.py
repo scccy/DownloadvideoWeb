@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "sqlalchemy",
     "custom",
     "flow_clip_talk.apps.CliptalkConfig",
+    "imaotai.apps.ImaotaiConfig"
 ]
 
 MIDDLEWARE = [
