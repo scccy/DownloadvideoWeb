@@ -1,0 +1,16 @@
+mysql_settings:
+  MYSQL_DB: 'dy_gather'
+  MYSQL_USER: 'root'
+  MYSQL_PASSWORD: 'xxxxxx'
+  MYSQL_HOST: 'xxxxx'
+  MYSQL_PORT: 'xxxxxx'
+
+
+server_settings:
+    url: 'xxxxxx'
+    MYSQL_DB: 'dy_gather'
+
+"""
+获取地点信息,这里用的高德 api,需要自己去高德开发者平台申请自己的 key
+"""
+AMAP_KEY : 'xxx'
