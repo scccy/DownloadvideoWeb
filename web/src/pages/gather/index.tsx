@@ -17,6 +17,7 @@ import { useApi } from '../../hooks';
 import { useGather } from '../../store/gather';
 import TableLayout from '../../components/tableLayout';
 import { date } from '../../utils';
+import { SearchResponseData } from '../../api/tk/type';
 import styles from './index.module.scss';
 import type { RenderParams } from '../../components/tableLayout';
 
@@ -27,7 +28,7 @@ const Gather: React.FC = () => {
   const [form] = Form.useForm();
   const searchFormData = useGather();
   const [loading, setLoading] = React.useState(false);
-  const [dataSource, setDataSource] = React.useState([]);
+  const [dataSource, setDataSource] = React.useState<SearchResponseData>([]);
 
   const handleSearch = useLockFn(async () => {
     try {
@@ -95,7 +96,7 @@ const Gather: React.FC = () => {
           columns={columns}
           rowKey="dynamic_cover"
           dataSource={dataSource}
-          scroll={{ y: height - 170 }}
+          scroll={{ y: height - 120 }}
         />
       );
     },
