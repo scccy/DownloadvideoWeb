@@ -6,4 +6,4 @@ type SearchData = {
   publish_time: string;
 };
 
-export type { SearchData };
+export type { SearchData, SearchResponseData };

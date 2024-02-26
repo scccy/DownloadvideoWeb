@@ -39,7 +39,8 @@ const Gather: React.FC = () => {
       });
 
       const result = await request;
-      setDataSource(result.data.data.data);
+
+      setDataSource(result.data);
     } finally {
       setLoading(false);
     }
