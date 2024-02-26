@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   Button,
   DatePicker,
@@ -12,23 +12,27 @@ import {
   TableProps,
 } from 'antd';
 import { useLockFn } from 'ahooks';
+import dayjs from 'dayjs';
 import { useApi } from '../../hooks';
 import { useGather } from '../../store/gather';
 import TableLayout from '../../components/tableLayout';
 import { date } from '../../utils';
 import styles from './index.module.scss';
+import type { RenderParams } from '../../components/tableLayout';
 
-const { defaultDateFormat } = date;
+const { disableNowDate, defaultDateFormat } = date;
 
 const Gather: React.FC = () => {
   const { tk } = useApi();
+  const [form] = Form.useForm();
   const searchFormData = useGather();
   const [loading, setLoading] = React.useState(false);
   const [dataSource, setDataSource] = React.useState([]);
 
   const handleSearch = useLockFn(async () => {
-    setLoading(true);
     try {
+      setLoading(true);
+      await form.validateFields();
       const { keyword, type, pages, sort_type, publish_time } = searchFormData;
       const { request } = tk.search({
         keyword,
@@ -77,12 +81,52 @@ const Gather: React.FC = () => {
     },
   ];
 
+  // 因为react会比较type，如果不缓存一下，那每次的type为FunctionComponent都会不同
+  const table = useCallback(
+    (props: RenderParams) => {
+      const { height } = props;
+
+      if (!height) return null;
+
+      return (
+        <Table
+          sticky
+          bordered
+          columns={columns}
+          rowKey="dynamic_cover"
+          dataSource={dataSource}
+          scroll={{ y: height - 170 }}
+        />
+      );
+    },
+    [dataSource],
+  );
+
   return (
     <div className={styles.container}>
-      <Form onValuesChange={handleValueChanges}>
-        <Flex wrap="wrap" gap="large" defaultValue={searchFormData}>
-          <Form.Item label="关键字" name="keyword" required>
+      <Form
+        form={form}
+        initialValues={{
+          ...searchFormData,
+          publish_time: dayjs(searchFormData.publish_time),
+        }}
+        onValuesChange={handleValueChanges}
+      >
+        <Flex wrap="wrap" gap="large">
+          <Form.Item
+            label="关键字"
+            name="keyword"
+            required
+            rules={[{ type: 'string', required: true }]}
+          >
             <Input />
+          </Form.Item>
+
+          <Form.Item label="发布时间" name="publish_time">
+            <DatePicker
+              format={defaultDateFormat}
+              disabledDate={disableNowDate}
+            />
           </Form.Item>
 
           <Form.Item label="搜索类型" name="type">
@@ -94,14 +138,6 @@ const Gather: React.FC = () => {
           </Form.Item>
 
           <Form.Item label="排序依据" name="sort_type">
-            <Input />
-          </Form.Item>
-
-          <Form.Item label="发布时间" name="publish_time">
-            <DatePicker format={defaultDateFormat} />
-          </Form.Item>
-
-          <Form.Item label="抖音 cookie" name="cookie">
             <Input />
           </Form.Item>
 
@@ -121,24 +157,7 @@ const Gather: React.FC = () => {
         </Flex>
       </Form>
 
-      <TableLayout>
-        {props => {
-          const { height } = props;
-
-          if (!height) return null;
-
-          return (
-            <Table
-              rowKey={'dynamic_cover'}
-              sticky
-              bordered
-              columns={columns}
-              dataSource={dataSource}
-              scroll={{ y: height - 170 }}
-            />
-          );
-        }}
-      </TableLayout>
+      <TableLayout>{table}</TableLayout>
     </div>
   );
 };
