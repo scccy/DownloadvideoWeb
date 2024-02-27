@@ -20,5 +20,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path("tk/", include("flow_tk.urls")),
+    path("mt/", include("imaotai.urls")),
     path("admin/", admin.site.urls),
 ]

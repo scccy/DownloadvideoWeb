@@ -1,4 +1,3 @@
-
 import hashlib
 import json
 import time
@@ -61,13 +60,11 @@ def init_headers(
 
 
 # 用高德api获取地图信息
-def select_geo(i: str):
+def select_geo(province: str, city: str, address: str, amap_key: str):
     # 校验高德api是否配置
-    if AMAP_KEY is None:
-        print("!!!!请配置 AMAP_KEY (高德地图的MapKey)")
-        raise ValueError
     resp = requests.get(
-        f"https://restapi.amap.com/v3/geocode/geo?key={AMAP_KEY}&output=json&address={i}"
+        "https://restapi.amap.com/v3/geocode/geo?key={amap_key}&output=json&address={city}{address}".format(
+            amap_key=amap_key, city=city, address=address)
     )
     geocodes: list = resp.json()["geocodes"]
     return geocodes
@@ -97,10 +94,14 @@ def get_vcode(mobile: str):
         json=params,
         headers=headers,
     )
-    if responses.status_code != 200:
-        print(
-            f"get v_code : params : {params}, response code : {responses.status_code}, response body : {responses.text}"
-        )
+    try:
+        if responses.status_code != 200:
+            return (
+                f"get v_code : params : {params}, response code : {responses.status_code}, "
+                f"response body : {responses.text}"
+            )
+    except Exception as e:
+        return e
 
 
 # 执行登录操作
@@ -124,19 +125,13 @@ def login(mobile: str, v_code: str):
     return responses.json()["data"]["token"], responses.json()["data"]["userId"]
 
 
-def get_location():
+def get_location(location):
     while 1:
-        location = input(
-            "请输入精确小区位置，例如[小区名称]，为你自动预约附近的门店:"
-        ).strip()
         selects = select_geo(location)
-
-        a = 0
         for item in selects:
             formatted_address = item["formatted_address"]
             province = item["province"]
             print(f"{a} : [地区:{province},位置:{formatted_address}]")
-            a += 1
         user_select = input("请选择位置序号,重新输入请输入[-]:").strip()
         if user_select == "-":
             continue
@@ -151,10 +146,10 @@ if __name__ == "__main__":
     items = []
     while 1:
         init_headers()
-        location_select: dict = get_location()
-        province = location_select["province"]
-        city = location_select["city"]
-        location: str = location_select["location"]
+        # location_select: dict = get_location()
+        # province = location_select["province"]
+        # city = location_select["city"]
+        # location: str = location_select["location"]
 
         mobile = input("输入手机号[18888888888]:").strip()
         get_vcode(mobile)
