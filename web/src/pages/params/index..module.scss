@@ -1,0 +1,10 @@
+.container {
+    height: 100%;
+    overflow: hidden;
+
+    .flex-container {
+        height: 100%;
+        width: 100%;
+        align-content: flex-start;
+    }
+}

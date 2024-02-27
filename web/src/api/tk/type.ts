@@ -44,4 +44,55 @@ type SearchResponseData = {
   width: number;
 }[];
 
-export type { SearchData, SearchResponseData };
+type SettingData = {
+  root: string;
+  folder_name: string;
+  name_format: string;
+  date_format: string;
+  split: string;
+  folder_mode: string;
+  music: string;
+  storage_format: string;
+  cookie: string;
+  dynamic_cover: string;
+  original_cover: string;
+  proxies: string;
+  download: string;
+  max_size: string;
+  chunk: string;
+  max_retry: string;
+  max_pages: string;
+  default_mode: string;
+  ffmpeg: string;
+  token: string;
+};
+
+type SettingResponseData = {
+  root: string;
+  folder_name: string;
+  name_format: string;
+  date_format: string;
+  split: string;
+  folder_mode: string;
+  music: string;
+  storage_format: string;
+  cookie: string;
+  dynamic_cover: string;
+  original_cover: string;
+  proxies: string;
+  download: string;
+  max_size: string;
+  chunk: string;
+  max_retry: string;
+  max_pages: string;
+  default_mode: string;
+  ffmpeg: string;
+  token: string;
+};
+
+export type {
+  SearchData,
+  SearchResponseData,
+  SettingData,
+  SettingResponseData,
+};
