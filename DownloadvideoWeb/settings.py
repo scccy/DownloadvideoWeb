@@ -140,3 +140,4 @@ MYSQL_HOST = config_yaml["mysql_settings"]["MYSQL_HOST"]
 MYSQL_PORT = config_yaml["mysql_settings"]["MYSQL_PORT"]
 
 APPEND_SLASH = False
+AMAP_KEY = config_yaml["AMAP_KEY"]

@@ -9,15 +9,15 @@ from custom.tk_post import (
 )
 import demjson3 as demjson
 
-response_data = dict()
 
-# 将字典转换为JSON字符串
-json_data = json.dumps(response_data)
+
+
 
 
 # 上传采集配置文件
 @require_POST
 def text(request):
+    response_data = dict()
     try:
         # 解析JSON数据
         request_data = demjson.decode(request.body)
@@ -32,6 +32,7 @@ def text(request):
 # 采集数据
 @require_POST
 def search(request):
+    response_data = dict()
     try:
         request_data = json.loads(request.body)  # 解析JSON数据
         # 采集数据结果
@@ -54,6 +55,7 @@ def search(request):
 
 @require_POST
 def account(request):
+    response_data = dict()
     try:
         request_data = json.loads(request.body)  # 解析JSON数据
         # 采集数据结果
@@ -77,6 +79,7 @@ def account(request):
 # 下载数据
 @require_POST
 def download_video(request):
+    response_data = dict()
     try:
         request_data = json.loads(request.body)  # 解析JSON数据
         # 处理数据...
