@@ -1,1 +1,2 @@
-export * as params from './gather';
+export * as gather from './gather';
+export * as params from './params';

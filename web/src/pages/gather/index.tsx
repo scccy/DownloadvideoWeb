@@ -14,13 +14,14 @@ import {
 import { useLockFn } from 'ahooks';
 import dayjs from 'dayjs';
 import { useApi } from '../../hooks';
-import { useGather } from '../../store/gather';
+import { gather } from '../../store';
 import TableLayout from '../../components/tableLayout';
 import { date } from '../../utils';
 import { SearchResponseData } from '../../api/tk/type';
 import styles from './index.module.scss';
 import type { RenderParams } from '../../components/tableLayout';
 
+const { useGather } = gather;
 const { disableNowDate, defaultDateFormat } = date;
 
 const Gather: React.FC = () => {
