@@ -44,9 +44,9 @@ def get_loaction(request):
     response_data['status'] = '200'
     response_data['data'] = location_select
     return JsonResponse(response_data)
-
-@require_POST
-def get_location_sure(request):
+# todo:收到确认的地址存入配置文件
+# @require_POST
+# def get_location_sure(request):
 
 
 # def get_imaotai(request):
