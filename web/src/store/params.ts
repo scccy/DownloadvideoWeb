@@ -2,23 +2,14 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 type Value = {
-  type: string;
-  pages: string;
-  keyword: string;
-  sort_type: string;
-  publish_time: string;
-
+  cookie: string;
   setParams: (prams: Omit<Value, 'setParams'>) => void;
 };
 
 const useParams = create(
   persist<Value>(
     set => ({
-      type: '',
-      pages: '1',
-      keyword: '',
-      sort_type: '',
-      publish_time: '',
+      cookie: '',
 
       setParams(value) {
         set(value);

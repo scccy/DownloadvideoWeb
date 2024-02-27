@@ -3,6 +3,7 @@ type SearchData = {
   type: string;
   pages: string;
   sort_type: string;
+  cookie: string;
   publish_time: string;
 };
 
@@ -44,7 +45,7 @@ type SearchResponseData = {
   width: number;
 }[];
 
-type SettingData = {
+type SettingData = Partial<{
   root: string;
   folder_name: string;
   name_format: string;
@@ -65,7 +66,7 @@ type SettingData = {
   default_mode: string;
   ffmpeg: string;
   token: string;
-};
+}>;
 
 type SettingResponseData = {
   root: string;

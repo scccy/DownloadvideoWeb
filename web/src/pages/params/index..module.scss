@@ -1,10 +1,11 @@
-.container {
-    height: 100%;
-    overflow: hidden;
+/** @format */
 
-    .flex-container {
-        height: 100%;
-        width: 100%;
-        align-content: flex-start;
-    }
+.container {
+  height: 100%;
+  overflow: hidden;
+
+  .cookie {
+    height: 150px;
+    resize: none;
+  }
 }

@@ -31,7 +31,7 @@ class Tk {
    */
   setting(data: SettingData) {
     return this.request<SettingResponseData>({
-      url: 'setting',
+      url: 'settings',
       method: 'post',
       data,
     });

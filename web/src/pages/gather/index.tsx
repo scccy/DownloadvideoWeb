@@ -14,18 +14,19 @@ import {
 import { useLockFn } from 'ahooks';
 import dayjs from 'dayjs';
 import { useApi } from '../../hooks';
-import { gather } from '../../store';
 import TableLayout from '../../components/tableLayout';
 import { date } from '../../utils';
 import { SearchResponseData } from '../../api/tk/type';
+import { useParams } from '../../store/params';
+import { useGather } from '../../store';
 import styles from './index.module.scss';
 import type { RenderParams } from '../../components/tableLayout';
 
-const { useGather } = gather;
 const { disableNowDate, defaultDateFormat } = date;
 
 const Gather: React.FC = () => {
   const { tk } = useApi();
+  const params = useParams();
   const [form] = Form.useForm();
   const searchFormData = useGather();
   const [loading, setLoading] = React.useState(false);
@@ -42,6 +43,7 @@ const Gather: React.FC = () => {
         pages,
         sort_type,
         publish_time,
+        cookie: params.cookie,
       });
 
       const result = await request;
