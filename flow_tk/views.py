@@ -11,6 +11,8 @@ import demjson3 as demjson
 
 
 
+@require_POST
+def getSearchData:
 
 
 
