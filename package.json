@@ -1,0 +1,6 @@
+{
+	"devDependencies": {
+		"postcss-scss": "^4.0.9",
+		"stylelint-config-standard-scss": "^13.0.0"
+	}
+}
