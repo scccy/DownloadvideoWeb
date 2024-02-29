@@ -11,8 +11,7 @@ import {
   Table,
   TableProps,
 } from 'antd';
-import { useLockFn, useUnmount } from 'ahooks';
-import dayjs from 'dayjs';
+import { useLockFn } from 'ahooks';
 import { useApi } from '../../hooks';
 import TableLayout from '../../components/table-layout';
 import { date } from '../../utils';
@@ -33,9 +32,7 @@ const Gather: React.FC = () => {
   const handleValueChanges: FormProps['onValuesChange'] = (
     changeValues,
     values,
-  ) => {
-    searchFormData.setParams(values);
-  };
+  ) => {};
 
   const handleDownload = (value: string) => {
     window.open(value);
@@ -102,13 +99,7 @@ const Gather: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Form
-        initialValues={{
-          ...searchFormData,
-          publish_time: dayjs(searchFormData.publish_time),
-        }}
-        onValuesChange={handleValueChanges}
-      >
+      <Form onValuesChange={handleValueChanges}>
         <Flex wrap="wrap" gap="large">
           <Form.Item
             label="关键字"

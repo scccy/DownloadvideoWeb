@@ -1,5 +1,8 @@
 {
-  "extends": "stylelint-config-standard-scss",
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-standard"
+  ],
   "overrides": [
     {
       "files": [
@@ -7,5 +10,8 @@
       ],
       "customSyntax": "postcss-scss"
     }
-  ]
+  ],
+  "rules": {
+    "consecutive-duplicates-with-different-syntaxes": null
+  }
 }

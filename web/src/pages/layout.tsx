@@ -17,29 +17,27 @@ const Layout: React.FC = () => {
 
   const items: MenuProps['items'] = [
     {
-      key: 'params',
+      key: '/params',
       label: '参数',
     },
     {
-      key: 'gather',
+      key: '/gather',
       label: '采集',
     },
     {
-      key: 'download',
+      key: '/download',
       label: '下载',
     },
     {
-      key: 'process',
+      key: '/process',
       label: '视频处理',
     },
   ];
 
   const handleMenuClick: MenuProps['onClick'] = event => {
     const { key } = event;
-    nav(`./${key}`, { relative: 'path' });
+    nav(key, { relative: 'path' });
   };
-
-  console.log(outlet);
 
   return (
     <AntdLayout style={{ height: '100vh' }}>
@@ -48,7 +46,7 @@ const Layout: React.FC = () => {
         <Menu
           theme="dark"
           mode="inline"
-          selectedKeys={location.pathname.split('/')}
+          selectedKeys={[location.pathname]}
           items={items}
           onClick={handleMenuClick}
         />
