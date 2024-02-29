@@ -1,7 +1,8 @@
 import React from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Layout as AntdLayout, Button, Menu, MenuProps, theme } from 'antd';
+import { useLocation, useNavigate, useOutlet } from 'react-router-dom';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { Layout as AntdLayout, Button, Menu, MenuProps, theme } from 'antd';
+import { KeepAlive } from '../components';
 
 const { Header, Sider, Content } = AntdLayout;
 
@@ -12,6 +13,7 @@ const Layout: React.FC = () => {
   } = theme.useToken();
   const nav = useNavigate();
   const location = useLocation();
+  const outlet = useOutlet();
 
   const items: MenuProps['items'] = [
     {
@@ -36,6 +38,8 @@ const Layout: React.FC = () => {
     const { key } = event;
     nav(`./${key}`, { relative: 'path' });
   };
+
+  console.log(outlet);
 
   return (
     <AntdLayout style={{ height: '100vh' }}>
@@ -72,7 +76,7 @@ const Layout: React.FC = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          <Outlet />
+          <KeepAlive>{outlet?.props.children.props.children}</KeepAlive>
         </Content>
       </AntdLayout>
     </AntdLayout>

@@ -14,13 +14,13 @@ import {
 import { useLockFn } from 'ahooks';
 import dayjs from 'dayjs';
 import { useApi } from '../../hooks';
-import TableLayout from '../../components/tableLayout';
+import TableLayout from '../../components/table-layout';
 import { date } from '../../utils';
 import { SearchResponseData } from '../../api/tk/type';
 import { useParams } from '../../store/params';
 import { useGather } from '../../store';
 import styles from './index.module.scss';
-import type { RenderParams } from '../../components/tableLayout';
+import type { RenderParams } from '../../components/table-layout';
 
 const { disableNowDate, defaultDateFormat } = date;
 

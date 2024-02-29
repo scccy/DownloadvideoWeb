@@ -11,48 +11,24 @@ import {
   Table,
   TableProps,
 } from 'antd';
-import { useLockFn } from 'ahooks';
+import { useLockFn, useUnmount } from 'ahooks';
 import dayjs from 'dayjs';
 import { useApi } from '../../hooks';
-import TableLayout from '../../components/tableLayout';
+import TableLayout from '../../components/table-layout';
 import { date } from '../../utils';
 import { SearchResponseData } from '../../api/tk/type';
-import { useParams } from '../../store/params';
-import { useGather } from '../../store';
 import styles from './index.module.scss';
-import type { RenderParams } from '../../components/tableLayout';
+import type { RenderParams } from '../../components/table-layout';
 
 const { disableNowDate, defaultDateFormat } = date;
 
 const Gather: React.FC = () => {
   const { tk } = useApi();
-  const params = useParams();
-  const [form] = Form.useForm();
-  const searchFormData = useGather();
+  const searchFormData = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [dataSource, setDataSource] = React.useState<SearchResponseData>([]);
 
-  const handleSearch = useLockFn(async () => {
-    try {
-      setLoading(true);
-      await form.validateFields();
-      const { keyword, type, pages, sort_type, publish_time } = searchFormData;
-      const { request } = tk.search({
-        keyword,
-        type,
-        pages,
-        sort_type,
-        publish_time,
-        cookie: params.cookie,
-      });
-
-      const result = await request;
-
-      setDataSource(result.data);
-    } finally {
-      setLoading(false);
-    }
-  });
+  const handleSearch = useLockFn(async () => {});
 
   const handleValueChanges: FormProps['onValuesChange'] = (
     changeValues,
@@ -127,7 +103,6 @@ const Gather: React.FC = () => {
   return (
     <div className={styles.container}>
       <Form
-        form={form}
         initialValues={{
           ...searchFormData,
           publish_time: dayjs(searchFormData.publish_time),

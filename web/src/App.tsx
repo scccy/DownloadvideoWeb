@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { useRoutes } from 'react-router-dom';
+import { redirect, useMatch, useRoutes } from 'react-router-dom';
 import Layout from './pages/layout';
 import Params from './pages/params';
 import Gather from './pages/gather';
@@ -11,16 +11,19 @@ const App: React.FC = () => {
   const element = useRoutes([
     {
       path: '/',
+      loader: () => {
+        redirect('/params');
+        return null;
+      },
       element: <Layout />,
       children: [
         {
           path: 'params',
-          index: true,
-          element: <Params />,
+          element: <Params key="params" />,
         },
-        { path: 'gather', element: <Gather /> },
-        { path: 'download', element: <Download /> },
-        { path: 'process', element: <Process /> },
+        { path: 'gather', element: <Gather key="gather" /> },
+        { path: 'download', element: <Download key="download" /> },
+        { path: 'process', element: <Process key="process" /> },
       ],
     },
   ]);
