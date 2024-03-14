@@ -3,6 +3,7 @@ import json
 import requests
 from flow_tk.models import GatherDay
 from DownloadvideoWeb import session
+from sqlalchemy import func, DateTime
 from DownloadvideoWeb.settings import server_url
 from sqlalchemy import select
 
@@ -129,3 +130,22 @@ def update_settings(para: dict):
     url = server_url + "settings/"
     response = requests.request("POST", url, headers=headers, data=para)
     response_data = response.json()
+
+
+def search_from_mysql(para: dict):
+    nickname = para["nickname"]
+    start_date = para["start_date"]
+    end_date = para["end_date"]
+    keyword = para['keyword']
+
+    query = session.query(GatherDay) \
+        .filter(func.lower(GatherDay.nickname).like(nickname)) \
+        .filter(GatherDay.collection_time >= start_date) \
+        .filter(GatherDay.collection_time <= end_date)
+
+    return_list = list()
+    results = query.all()
+    for i in range(0, len(results)):
+        return_list.append(json.dumps(GatherDay.to_str(results[i]), ensure_ascii=False))
+
+    return return_list
