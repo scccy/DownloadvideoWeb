@@ -6,14 +6,9 @@ from custom.tk_post import (
     search_data_save,
     search_data_by_account,
     download_video_by_id,
+    search_from_mysql,
 )
 import demjson3 as demjson
-
-
-
-@require_POST
-def getSearchData:
-
 
 
 # 上传采集配置文件
@@ -86,10 +81,10 @@ def download_video(request):
         request_data = json.loads(request.body)  # 解析JSON数据
         # 处理数据...
         if (
-            request_data["uid"] is not None
-            and request_data["uid"] != ""
-            and request_data["video_id"] is not None
-            and request_data["video_id"] != ""
+                request_data["uid"] is not None
+                and request_data["uid"] != ""
+                and request_data["video_id"] is not None
+                and request_data["video_id"] != ""
         ):
             data = download_video_by_id(request_data["uid"], request_data["video_id"])
             response_data["status"] = 200
@@ -100,7 +95,25 @@ def download_video(request):
         return HttpResponseBadRequest("Invalid JSON")
 
 
-# todo:修改配置文件
+# todo：返回查询数据
+@require_POST
+def get_search_data_list(request):
+    response_data = dict()
+    request_data = json.loads(request.body)
+    try:
+        response_data["status"] = 200
+        response_data["msg"] = "success"
+        response_data["data"] = search_from_mysql(request_data)
+    except Exception as e:
+        response_data["status"] = 500
+        response_data["msg"] = "fail"
+        response_data["data"] = e
+    return JsonResponse(response_data)
+
+
+
+
+    # todo:修改配置文件
 # @require_POST
 # def settings(request):
 #     try:
