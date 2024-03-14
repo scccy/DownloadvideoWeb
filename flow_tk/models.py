@@ -46,13 +46,46 @@ class GatherDay(Base):
     load_if = Column(Integer)
     load_sts = Column(Integer)
     del_if = Column(Integer)
+    keyword = Column(String(255))
 
-
-def __init__(self, **kwargs):
-    for key, value in kwargs.items():
-        if hasattr(self, key):
-            setattr(self, key, value)
-
-
-# 注册 User 类到映射中
-Base.metadata.create_all(engine)
+    @staticmethod
+    def to_str(GatherDay):
+        return {
+            'type': GatherDay.type,
+            'collection_time': str(GatherDay.collection_time),
+            'uid': GatherDay.uid,
+            'video_id': GatherDay.video_id,
+            'sec_uid': GatherDay.sec_uid,
+            'unique_id': GatherDay.unique_id,
+            'short_id': GatherDay.short_id,
+            'desc': GatherDay.desc,
+            'text_extra': GatherDay.text_extra,
+            'duration': GatherDay.duration,
+            'ratio': GatherDay.ratio,
+            'height': GatherDay.height,
+            'width': GatherDay.width,
+            'share_url': GatherDay.share_url,
+            'create_time': str(GatherDay.create_time),
+            'uri': GatherDay.uri,
+            'nickname': GatherDay.nickname,
+            'user_age': GatherDay.user_age,
+            'signature': GatherDay.signature,
+            'downloads': GatherDay.downloads,
+            'music_author': GatherDay.music_author,
+            'music_title': GatherDay.music_title,
+            'music_url': GatherDay.music_url,
+            'origin_cover': GatherDay.origin_cover,
+            'dynamic_cover': GatherDay.dynamic_cover,
+            'tag_1': GatherDay.tag_1,
+            'tag_2': GatherDay.tag_2,
+            'tag_3': GatherDay.tag_3,
+            'digg_count': GatherDay.digg_count,
+            'comment_count': GatherDay.comment_count,
+            'collect_count': GatherDay.collect_count,
+            'share_count': GatherDay.share_count,
+            'extra': GatherDay.extra,
+            'load_if': GatherDay.load_if,
+            'load_sts': GatherDay.load_sts,
+            'del_if': GatherDay.del_if,
+            'keyword': GatherDay.keyword
+        }
