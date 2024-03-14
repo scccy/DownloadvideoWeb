@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # 'sqlalchemy_django_admin',
     "flow_tk.apps.TkflowConfig",
     "sqlalchemy",
     "custom",
@@ -83,7 +82,7 @@ WSGI_APPLICATION = "DownloadvideoWeb.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": config_yaml["server_settings"]["MYSQL_DB"],
+        "NAME": config_yaml["server_settings"]["tk_catch"]["MYSQL_DB"],
         "USER": config_yaml["mysql_settings"]["MYSQL_USER"],
         "PASSWORD": config_yaml["mysql_settings"]["MYSQL_PASSWORD"],
         "HOST": config_yaml["mysql_settings"]["MYSQL_HOST"],
@@ -130,7 +129,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # server_settings
-server_url = config_yaml["server_settings"]["url"]
+server_url = config_yaml["server_settings"]["tk_catch"]["url"]
 
 # mysql_settings
 MYSQL_DBNAME = config_yaml["mysql_settings"]["MYSQL_DB"]
@@ -140,4 +139,4 @@ MYSQL_HOST = config_yaml["mysql_settings"]["MYSQL_HOST"]
 MYSQL_PORT = config_yaml["mysql_settings"]["MYSQL_PORT"]
 
 APPEND_SLASH = False
-AMAP_KEY = config_yaml["AMAP_KEY"]
+AMAP_KEY = config_yaml["API_KEY"]["AMAP_KEY"]
